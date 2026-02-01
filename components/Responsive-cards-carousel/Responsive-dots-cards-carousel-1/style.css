@@ -1,0 +1,114 @@
+:root {
+  --gap: 15px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.carousel-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-window {
+  overflow: hidden; /* Important pour masquer les cartes qui dépassent */
+  border-radius: 12px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--gap);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%; /* CHANGEZ CECI : de max-content à 100% */
+}
+
+/* CARDS */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Mobile : 1 carte par vue */
+  min-width: calc(100vw - 40px);
+}
+
+/* Desktop : 4 cartes par vue */
+/* Desktop : 4 cartes par vue */
+@media (min-width: 768px) {
+  .carousel-container {
+    max-width: 1200px;
+  }
+
+  .card {
+    /* Correction : (100% - total des gaps) / 4 cartes */
+    /* Il y a 3 espaces pour 4 cartes affichées */
+    flex: 0 0 calc((100% - (var(--gap) * 3)) / 4);
+    min-width: calc((100% - (var(--gap) * 3)) / 4);
+  }
+}
+
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-content h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+.card-content p {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+/* DOTS */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background: #3498db;
+  transform: scale(1.3);
+}
