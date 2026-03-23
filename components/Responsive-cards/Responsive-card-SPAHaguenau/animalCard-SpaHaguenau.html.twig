@@ -1,8 +1,10 @@
 <div class="animal-card">
 	<div
 		class="img-container">
-		{# Image : Route app_files_get_sites du controleur FilesController #}
-		<img src="{{ card.picture ? path('app_file_get_site', { id: card.picture.id, domain: site.domain }) : (card.specie.id == 1 ? asset('build/themes/' ~ theme ~ '/images/animal-default.jpg') : asset('build/themes/' ~ theme ~ '/images/cat-default.png')) }}" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="{{ card.name }}"/>
+        <a href="/animal/{{ card.slug }}-{{ card.id }}">
+		    {# Image : Route app_files_get_sites du controleur FilesController #}
+		    <img src="{{ card.picture ? path('app_file_get_site', { id: card.picture.id, domain: site.domain }) : (card.specie.id == 1 ? asset('build/themes/' ~ theme ~ '/images/animal-default.jpg') : asset('build/themes/' ~ theme ~ '/images/cat-default.png')) }}" alt="{{ card.name }}"/>
+        </a>
 	</div>
 	<div class="card-body d-flex flex-column">
 		<div class="animal-name text-primary">
@@ -16,7 +18,7 @@
 				<i class="fas fa-birthday-cake"></i>
 				{{ card.birthday|date('d/m/Y') }}</span>
 		</div>
-		<div class="animal-gender text-center">
+		<div class="animal-gender">
 			{% if card.gender == 1 %}
 				<i class="fas fa-mars fs-4"></i>
 				Mâle
