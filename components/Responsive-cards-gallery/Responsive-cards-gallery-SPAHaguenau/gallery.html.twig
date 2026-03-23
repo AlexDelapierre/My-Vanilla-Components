@@ -1,0 +1,57 @@
+<div class="album">
+  <div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5">
+      {# 1. AFFICHAGE DES CARDS #}
+      {% for item in items %}
+        <div class="col">
+            {# On passe 'card': item pour les templates de cards #}
+            {% include cardTemplate with {'card': item} %}
+        </div>
+      {% else %}
+        <div class="col-12">
+            {% if cardType == 'animals' %}
+                <p class="text-center">Pas d'animaux à afficher.</p>
+            {% elseif cardType == 'events' %}
+                <p class="text-center">Pas d'événements à afficher.</p>
+            {% elseif cardType == 'news' %}
+                <p class="text-center">Pas d'actualités à afficher.</p>
+            {% else %}
+                <p class="text-center">Pas d'éléments à afficher.</p>
+            {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    
+    {# 2. BARRE DE PAGINATION #}
+    {% if items.paginationData is defined and items.pageCount > 1 %}
+      <nav class="d-flex justify-content-center mt-5">
+        <ul class="pagination">
+          {# Précédent #}
+          {% if items.currentPageNumber > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('app.pages.page_pretty', {'slug': currentSlug, 'page': items.currentPageNumber - 1 }) }}">Précédent</a>
+            </li>
+          {% endif %}
+
+          {# Chiffres #}
+          {% for p in 1..items.pageCount %}
+            <li class="page-item {{ p == items.currentPageNumber ? 'active' : '' }}">
+                <a 
+                  class="page-link"
+                  style="{{ p == items.currentPageNumber ? 'background-color: var(--primary-color) !important; border-color: var(--primary-color) !important; color: white !important;' : '' }}"
+                  href="{{ path('app.pages.page_pretty', {'slug': currentSlug, 'page': p }) }}">{{ p }}</a>
+            </li>
+          {% endfor %}
+
+          {# Suivant #}
+          {% if items.currentPageNumber < items.pageCount %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('app.pages.page_pretty', {'slug': currentSlug, 'page': items.currentPageNumber + 1 }) }}">Suivant</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+</div>

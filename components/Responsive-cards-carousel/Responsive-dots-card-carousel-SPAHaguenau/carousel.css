@@ -1,0 +1,94 @@
+/* -------------------------------------------------------------------------- */
+/* 1. COMPORTEMENT GLOBAL DU CAROUSEL (SÉLECTION & DRAG)                      */
+/* -------------------------------------------------------------------------- */
+
+/* Empêche la sélection de texte dans le carousel */
+.carousel-container,
+.carousel-container .carousel-window,
+.carousel-container .carousel-track {
+  user-select: none;
+  -webkit-user-select: none;
+  /* Chrome, Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+}
+
+/* Empêche le navigateur de "drag" l'image ou les liens lors du swipe */
+.carousel-track img,
+.carousel-track a {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. STRUCTURE DU CAROUSEL                                                   */
+/* -------------------------------------------------------------------------- */
+
+.carousel-container {
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-window {
+  /* Pour masquer les cartes qui dépassent */
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  padding: 1vh 0;
+  touch-action: pan-y;
+  /* Autorise le scroll vertical normal, mais laisse le JS gérer l'horizontal */
+}
+
+/* -------------------------------------- Style surchargé spécifique pour les Card de carousel ----------------------------------- */
+/* Version mobile - 1 card affichée */
+.carousel-cards-item {
+  flex: 0 0 100%;
+  padding: 0 5vw;
+}
+
+/* Version Desktop (Tablettes et Laptop) - 2 cards affichées */
+@media (min-width: 768px) {
+  .carousel-cards-item {
+    flex: 0 0 50%;
+    padding: 0 1vw;
+  }
+}
+
+/* Version Ecrans larges - 3 cards affichées */
+@media (min-width: 1368px) {
+  .carousel-cards-item {
+    flex: 0 0 33.3333%;
+    padding: 0 1vw;
+  }
+}
+
+/* DOTS */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background: var(--primary-color);
+  transform: scale(1.3);
+}

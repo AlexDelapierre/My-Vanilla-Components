@@ -1,0 +1,25 @@
+<div class="carousel-container carousel-cards js-carousel-cards">
+	<div class="carousel-window">
+		<div class="carousel-track js-carousel-track">
+			{% for item in items %}
+				<div class="carousel-cards-item">
+					{% include cardTemplate with {'card': item} %}
+				</div>
+			{% else %}
+				<div class="col-12">
+                    {% if cardType == 'animals' %}
+                        <p class="text-center">Pas d'animaux à afficher.</p>
+                    {% elseif cardType == 'events' %}
+                        <p class="text-center">Pas d'événements à afficher.</p>
+                    {% elseif cardType == 'news' %}
+                        <p class="text-center">Pas d'actualités à afficher.</p>
+                    {% else %}
+					    <p class="text-center">Pas d'éléments à afficher.</p>
+                    {% endif %}
+                    
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="carousel-dots js-carousel-dots"></div>
+</div>

@@ -1,0 +1,34 @@
+<div class="animal-card">
+	<div
+		class="img-container">
+		{# Image : Route app_files_get_sites du controleur FilesController #}
+		<img src="{{ card.picture ? path('app_file_get_site', { id: card.picture.id, domain: site.domain }) : (card.specie.id == 1 ? asset('build/themes/' ~ theme ~ '/images/animal-default.jpg') : asset('build/themes/' ~ theme ~ '/images/cat-default.png')) }}" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="{{ card.name }}"/>
+	</div>
+	<div class="card-body d-flex flex-column">
+		<div class="animal-name text-primary">
+			<h3 class="mt-0 text-clamp-2">{{ card.name }}</h3>
+		</div>
+		<div class="animal-meta">
+			<span>
+				<i class="fas fa-tag"></i>
+				{{ card.race|default('Race non précisée') }}</span>
+			<span>
+				<i class="fas fa-birthday-cake"></i>
+				{{ card.birthday|date('d/m/Y') }}</span>
+		</div>
+		<div class="animal-gender text-center">
+			{% if card.gender == 1 %}
+				<i class="fas fa-mars fs-4"></i>
+				Mâle
+			{% elseif card.gender == 2 %}
+				<i class="fas fa-venus fs-4"></i>
+				Femelle
+			{% endif %}
+		</div>
+		<div class="animal-action w-100 mt-auto">
+			<a href="/animal/{{ card.slug }}-{{ card.id }}" class="btn btn-lg btn-primary text-white">
+				<i class="fas fa-paw"></i>
+				Voir la fiche</a>
+		</div>
+	</div>
+</div>
